@@ -1,0 +1,45 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Parameters</title>
+</head>
+<body>
+    <h1>URL Parameters</h1>
+    <div id="parameters"><p><strong>test</strong>: 213<br></p></div>
+
+    <script>
+        // Function to parse URL parameters
+        function getParams() {
+            var params = {};
+            var url = window.location.href;
+            var queryString = url.split('?')[1];
+            if (queryString) {
+                queryString = queryString.split('#')[0];
+                var pairs = queryString.split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    var pair = pairs[i].split('=');
+                    params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+                }
+            }
+            return params;
+        }
+
+        // Function to update the HTML content with parameters
+        function updateContent() {
+            var params = getParams();
+            var parametersDiv = document.getElementById('parameters');
+            var html = '<p>';
+            for (var key in params) {
+                html += '<strong>' + key + '</strong>: ' + params[key] + '<br>';
+            }
+            html += '</p>';
+            parametersDiv.innerHTML = html;
+        }
+
+        // Call the function to update content on page load
+        window.onload = function () {
+            updateContent();
+        };
+    </script>
+
+</body></html>
