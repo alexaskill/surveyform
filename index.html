@@ -3,10 +3,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Parameters</title>
 </head>
+
 <body>
     <h1>URL Parameters</h1>
     <div id="parameters"><p><strong>test</strong>: 213<br></p></div>
+	<form id="myForm">
+	   <!-- Form fields -->
+	   <input type="text" id="responseField">
+	   <button id="submitButton">Submit</button>
+	</form>
 
+	<script>
+	document.getElementById('submitButton').addEventListener('click', function() {
+		var response = document.getElementById('responseField').value;
+		window.parent.postMessage({ response: response }, '*');
+	});
+	</script>
     <script>
         // Function to parse URL parameters
         function getParams() {
